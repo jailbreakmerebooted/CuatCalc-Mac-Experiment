@@ -37,7 +37,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Set the title of the status bar item button
         if let button = statusBarItem.button {
-            button.title = "CustBar"
+            button.title = "CustCalc"
         }
         
         // Create a SwiftUI view and wrap it in an NSHostingView
