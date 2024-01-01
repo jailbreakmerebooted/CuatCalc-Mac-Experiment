@@ -45,7 +45,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let hostingView = NSHostingView(rootView: contentView)
         
         // Set the hosting view as the content of the status bar item
-        statusBarItem.button?.addSubview(hostingView)
         
         // Create a popover with the hosting view
         popover = NSPopover()
