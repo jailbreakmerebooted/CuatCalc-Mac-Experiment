@@ -1,6 +1,7 @@
 import SwiftUI
 //import MobileCoreServices
 import UniformTypeIdentifiers
+import AppKit
 
 struct Layout: Codable, Identifiable, Equatable {
     let id = UUID() // Unique identifier for the layout
@@ -208,13 +209,7 @@ struct LayoutST: View {
                                         .foregroundColor(.primary)
                                 }
                                 .contextMenu {
-                                    Button(action: {
-                                        applypreview(layout)
-                                        layoutpreview = 1
-                                    } ) {
-                                        Label("Info", systemImage: "info")
-                                    }
-                                    Section() {
+                                    Section {
                                         Button(action: {
                                             applycolor(layout)
                                         }) {
@@ -311,7 +306,7 @@ struct LayoutST: View {
                                     self.yemo = layout.yemo ?? 0.0
                                     self.font_size3 = layout.font_size3 ?? 0.0
                                     self.layoutName = layout.layoutname ?? "Unknown"
-                                    //convcolorback()
+                                    convcolorback()
                                     saveLayout()
                                 } catch {
                                     print("Error importing layout: \(error)")
@@ -527,31 +522,36 @@ struct LayoutST: View {
         } catch {
             print("Error exporting layout: \(error)")
         }
-    }
+    }*/
     private func colorToRGBString(_ color: Color) -> String {
-        let uiColor = UIColor(color)
-        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
-        uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        // Convert SwiftUI Color to NSColor
+        let nsColor = NSColor(color)
         
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        nsColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
         let redInt = Int(red * 255)
         let greenInt = Int(green * 255)
         let blueInt = Int(blue * 255)
-        
+
         return "\(redInt),\(greenInt),\(blueInt)"
     }
-    
+
     private func RGBStringToColor(_ rgbString: String) -> Color {
         let components = rgbString.components(separatedBy: ",").compactMap { Int($0) }
         guard components.count == 3 else {
-            return .black
+            return Color.black
         }
-        
+
         let red = Double(components[0]) / 255.0
         let green = Double(components[1]) / 255.0
         let blue = Double(components[2]) / 255.0
-        
+
+        // Create SwiftUI Color from RGB components
         return Color(red: red, green: green, blue: blue)
     }
+
+
     private func convcolor() {
         colorString = colorToRGBString(selcolor)
         colorString2 = colorToRGBString(selcolor2)
@@ -570,9 +570,9 @@ struct LayoutST: View {
         selcolor5 = RGBStringToColor(colorString6)
         color_border = RGBStringToColor(colorString5)
         uicolor = RGBStringToColor(colorString7)
-    }*/
+    }
     private func saveLayout() {
-        //convcolor()
+        convcolor()
         let layout = Layout(width_calc_button: width_calc_button,
                             height_calc_button: height_calc_button,
                             roundBtn: round_btn,
@@ -639,7 +639,7 @@ struct LayoutST: View {
         shadow_opacity_1 = layout.shadow_opacity_1 ?? 0
         rotate_btn = layout.rotate_btn ?? 0
         shadow2 = layout.shadow2 ?? 0.0
-        //convcolorback()
+        convcolorback()
         sound = layout.sound ?? ""
         round_btn12 = layout.round_btn_12 ?? 0
         width_output_box = layout.width_box ?? 0
@@ -750,7 +750,7 @@ struct LayoutST: View {
         colorString5 = layout.color5 ?? ""
         colorString6 = layout.color6 ?? ""
         colorString7 = layout.color7 ?? ""
-        //convcolorback()
+        convcolorback()
     }
     func applyshape(_ layout: Layout) {
         width_calc_button = layout.width_calc_button ?? 0.0
@@ -814,7 +814,7 @@ struct LayoutST: View {
             colorString5 = layout.color5 ?? ""
             colorString6 = layout.color6 ?? ""
             colorString7 = layout.color7 ?? ""
-            //convcolorback()
+            convcolorback()
             font_size2_1 = layout.font_size2_1 ?? 0.0
             xemo = layout.xemo ?? 0.0
             yemo = layout.yemo ?? 0.0
