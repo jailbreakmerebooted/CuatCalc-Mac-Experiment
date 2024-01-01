@@ -190,15 +190,19 @@ struct Calculator: View {
                         
                         LazyVGrid(columns: columns, spacing: spacing_grid_hor) {
                             ForEach(symbols, id: \.self) { symbol in
-                                ButtonLoader(height_calc_button: $height_calc_button, width_calc_button: $width_calc_button, round_btn: $round_btn, selcolor4: $selcolor4, shadow_opacity_1: $shadow_opacity_1, shadow_pos_x: $shadow_pos_x, shadow_pos_y: $shadow_pos_y, shadow1: $shadow1, color_border: $color_border, rotate_btn: $rotate_btn, width_border: $width_border, selcolor: $selcolor, selcolor2: $selcolor2, selectedEmoji: $selectedEmoji, font_size2_1: $font_size2_1, xemo: $xemo, yemo: $yemo, symbol: symbol, font_size: $font_size, fontName: $fontName, round_btn12: $round_btn12, selcolor5: $selcolor5, shadow2: $shadow2, rotation: $rotation)
-                                    .onTapGesture {
-                                        buttonPressed(symbol)
-                                        //triggerHapticFeedback()
-                                        if sound != "" {
-                                            player.loadMusic(name: sound)
-                                            player.play()
-                                        }
+                                Button(action: {
+                                    buttonPressed(symbol)
+                                    //triggerHapticFeedback()
+                                    if sound != "" {
+                                        player.loadMusic(name: sound)
+                                        player.play()
                                     }
+                                }) {
+                                    ButtonLoader(height_calc_button: $height_calc_button, width_calc_button: $width_calc_button, round_btn: $round_btn, selcolor4: $selcolor4, shadow_opacity_1: $shadow_opacity_1, shadow_pos_x: $shadow_pos_x, shadow_pos_y: $shadow_pos_y, shadow1: $shadow1, color_border: $color_border, rotate_btn: $rotate_btn, width_border: $width_border, selcolor: $selcolor, selcolor2: $selcolor2, selectedEmoji: $selectedEmoji, font_size2_1: $font_size2_1, xemo: $xemo, yemo: $yemo, symbol: symbol, font_size: $font_size, fontName: $fontName, round_btn12: $round_btn12, selcolor5: $selcolor5, shadow2: $shadow2, rotation: $rotation)
+                                }
+                                .buttonStyle(.plain)
+
+
                             }
                         }
                         .frame(width: spacing_grid_ver)
