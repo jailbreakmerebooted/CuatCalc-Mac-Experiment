@@ -131,6 +131,7 @@ struct LayoutST: View {
     @Binding var tabbar4: String
     @Binding var rotation: Double
     @Binding var fontName2: String
+    @Binding var sheet: Bool
     
     //preview_vals
     @State private var h1: CGFloat = 0.0
@@ -244,11 +245,18 @@ struct LayoutST: View {
                                 deleteLayouts(at: indexSet)
                             }
                         }
+                        Spacer().frame(height: 40)
                         Button(action: {
                             openFilePanel()
                             //isImporting = true
                         }) {
                             Label("Import Layout", systemImage: "square.and.arrow.down")
+                        }
+                        Button(action: {
+                            sheet = false
+                            //isImporting = true
+                        }) {
+                            Label("Close", systemImage: "xmark")
                         }
                     }
                     .onAppear(perform: loadSavedLayouts)

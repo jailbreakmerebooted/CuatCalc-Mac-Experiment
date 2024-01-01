@@ -48,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Create a popover with the hosting view
         popover = NSPopover()
-        popover.contentSize = NSSize(width: 200, height: 850)
+        popover.contentSize = NSSize(width: 200, height: 800)
         popover.contentViewController = NSViewController()
         popover.contentViewController?.view = hostingView
         
