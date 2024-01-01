@@ -193,10 +193,6 @@ struct LayoutST: View {
                                 Button("Save") {
                                     saveLayout()
                                 }
-                                .frame(width: 60, height: 33)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(5)
                             }
                             .frame(height: 50)
                         }
