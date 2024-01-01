@@ -249,79 +249,13 @@ struct LayoutST: View {
                             }
                         }
                         Button(action: {
-                            isImporting = true
+                            openFilePanel()
+                            //isImporting = true
                         }) {
                             Label("Import Layout", systemImage: "square.and.arrow.down")
                         }
                     }
                     .onAppear(perform: loadSavedLayouts)
-                    .onAppear()
-                    .fileImporter(isPresented: $isImporting, allowedContentTypes: [.json]) { result in
-                        switch result {
-                        case .success(let selectedURL):
-                            print("Selected URL: \(selectedURL)")
-                            
-                            // Check if the file exists
-                            if FileManager.default.fileExists(atPath: selectedURL.path) {
-                                do {
-                                    // Read the file data
-                                    let layoutData = try Data(contentsOf: selectedURL)
-                                    let layout = try JSONDecoder().decode(Layout.self, from: layoutData)
-                                    
-                                    // Process the layout data
-                                    self.width_calc_button = layout.width_calc_button ?? 0
-                                    self.height_calc_button = layout.height_calc_button ?? 0
-                                    self.round_btn = layout.roundBtn ?? 0
-                                    self.symbols = layout.symbols ?? []
-                                    self.grid_count = layout.grid_count ?? 0
-                                    self.shadow1 = layout.shadow1 ?? 0.0
-                                    self.shadow_pos_y = layout.shadow_pos_y ?? 0.0
-                                    self.shadow_pos_x = layout.shadow_pos_x ?? 0.0
-                                    self.width_border = layout.width_border ?? 0.0
-                                    self.font_size = layout.font_size ?? 0.0
-                                    self.shadow_opacity_1 = layout.shadow_opacity_1 ?? 0.0
-                                    self.rotate_btn = layout.rotate_btn ?? 0.0
-                                    self.colorString = layout.color1 ?? ""
-                                    self.colorString2 = layout.color2 ?? ""
-                                    self.colorString3 = layout.color3 ?? ""
-                                    self.colorString4 = layout.color4 ?? ""
-                                    self.colorString5 = layout.color5 ?? ""
-                                    self.colorString6 = layout.color6 ?? ""
-                                    self.colorString7 = layout.color7 ?? ""
-                                    self.sound = layout.sound ?? ""
-                                    self.shadow2 = layout.shadow2 ?? 0.0
-                                    self.round_btn12 = layout.round_btn_12 ?? 0.0
-                                    self.width_output_box = layout.width_box ?? 0.0
-                                    self.height_output_box = layout.height_box ?? 0.0
-                                    self.spacing_grid_hor = layout.grid_hor ?? 0.0
-                                    self.spacing_grid_ver = layout.grid_ver ?? 0.0
-                                    self.spacing_outputbox = layout.grid_space ?? 0.0
-                                    self.fontName = layout.fontname ?? ""
-                                    self.selectedEmoji = layout.emo1 ?? ""
-                                    self.gesturefield1 = layout.sm1 ?? 0
-                                    self.gesturefield2 = layout.sm2 ?? 0
-                                    self.gesturefield3 = layout.sm3 ?? 0
-                                    self.font_size2_1 = layout.font_size2_1 ?? 0.0
-                                    self.xemo = layout.xemo ?? 0.0
-                                    self.yemo = layout.yemo ?? 0.0
-                                    self.font_size3 = layout.font_size3 ?? 0.0
-                                    self.layoutName = layout.layoutname ?? "Unknown"
-                                    convcolorback()
-                                    saveLayout()
-                                } catch {
-                                    print("Error importing layout: \(error)")
-                                }
-                            } else {
-                                // Handle the case when the file doesn't exist
-                                print("The file doesn't exist.")
-                                // Display an error message or take appropriate action
-                            }
-                        case .failure(let error):
-                            print("Error selecting file: \(error)")
-                        }
-                        
-                        isImporting = false
-                    }
                     .navigationTitle("Layouts")
                 }
             }
@@ -422,6 +356,74 @@ struct LayoutST: View {
             print("Error updating saved layouts: \(error)")
         }
     }
+    func openFilePanel() {
+        let openPanel = NSOpenPanel()
+        openPanel.allowedFileTypes = ["json"]
+
+        if openPanel.runModal() == NSApplication.ModalResponse.OK {
+            if let selectedURL = openPanel.urls.first {
+                print("Selected URL: \(selectedURL)")
+
+                // Check if the file exists
+                if FileManager.default.fileExists(atPath: selectedURL.path) {
+                    do {
+                        // Read the file data
+                        let layoutData = try Data(contentsOf: selectedURL)
+                        let layout = try JSONDecoder().decode(Layout.self, from: layoutData)
+
+                        // Process the layout data
+                        self.width_calc_button = layout.width_calc_button ?? 0
+                        self.height_calc_button = layout.height_calc_button ?? 0
+                        self.round_btn = layout.roundBtn ?? 0
+                        self.symbols = layout.symbols ?? []
+                        self.grid_count = layout.grid_count ?? 0
+                        self.shadow1 = layout.shadow1 ?? 0.0
+                        self.shadow_pos_y = layout.shadow_pos_y ?? 0.0
+                        self.shadow_pos_x = layout.shadow_pos_x ?? 0.0
+                        self.width_border = layout.width_border ?? 0.0
+                        self.font_size = layout.font_size ?? 0.0
+                        self.shadow_opacity_1 = layout.shadow_opacity_1 ?? 0.0
+                        self.rotate_btn = layout.rotate_btn ?? 0.0
+                        self.colorString = layout.color1 ?? ""
+                        self.colorString2 = layout.color2 ?? ""
+                        self.colorString3 = layout.color3 ?? ""
+                        self.colorString4 = layout.color4 ?? ""
+                        self.colorString5 = layout.color5 ?? ""
+                        self.colorString6 = layout.color6 ?? ""
+                        self.colorString7 = layout.color7 ?? ""
+                        self.sound = layout.sound ?? ""
+                        self.shadow2 = layout.shadow2 ?? 0.0
+                        self.round_btn12 = layout.round_btn_12 ?? 0.0
+                        self.width_output_box = layout.width_box ?? 0.0
+                        self.height_output_box = layout.height_box ?? 0.0
+                        self.spacing_grid_hor = layout.grid_hor ?? 0.0
+                        self.spacing_grid_ver = layout.grid_ver ?? 0.0
+                        self.spacing_outputbox = layout.grid_space ?? 0.0
+                        self.fontName = layout.fontname ?? ""
+                        self.selectedEmoji = layout.emo1 ?? ""
+                        self.gesturefield1 = layout.sm1 ?? 0
+                        self.gesturefield2 = layout.sm2 ?? 0
+                        self.gesturefield3 = layout.sm3 ?? 0
+                        self.font_size2_1 = layout.font_size2_1 ?? 0.0
+                        self.xemo = layout.xemo ?? 0.0
+                        self.yemo = layout.yemo ?? 0.0
+                        self.font_size3 = layout.font_size3 ?? 0.0
+                        self.layoutName = layout.layoutname ?? "Unknown"
+
+                        convcolorback()
+                        saveLayout()
+                    } catch {
+                        print("Error importing layout: \(error)")
+                    }
+                } else {
+                    // Handle the case when the file doesn't exist
+                    print("The file doesn't exist.")
+                    // Display an error message or take appropriate action
+                }
+            }
+        }
+    }
+
     func handleImportedLayout(_ layout: Layout) {
         // Access the properties of the imported layout and perform any necessary actions
         
