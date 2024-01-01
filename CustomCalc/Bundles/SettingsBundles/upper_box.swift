@@ -81,12 +81,12 @@ struct obset: View {
                     HStack {
                         Text("Height")
                             .frame(width: 150)
-                        Slider(value: $height_output_box, in: 0...heightopt_geo) //500 > 250
+                        Slider(value: $height_output_box, in: 0...500) //500 > 250
                     }
                     HStack {
                         Text("Width")
                             .frame(width: 150)
-                        Slider(value: $width_output_box, in: 0...widthopt_geo) //500
+                        Slider(value: $width_output_box, in: 0...500) //500
                 }
             }
             Section(header: Text("Font")) {

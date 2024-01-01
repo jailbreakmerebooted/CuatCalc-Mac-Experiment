@@ -50,13 +50,13 @@ struct ColorSettings: View {
                 HStack {
                     Text("Height")
                         .frame(width: 150)
-                    Slider(value: $height_calc_button, in: 0...height_calc_button_geo) //100
+                    Slider(value: $height_calc_button, in: 0...100) //100
                 }
                 HStack {
                     HStack {
                         Text("Width")
                             .frame(width: 150)
-                        Slider(value: $width_calc_button, in: 0...width_calc_button_geo) //100
+                        Slider(value: $width_calc_button, in: 0...100) //100
                     }
                 }
                 HStack {
@@ -87,7 +87,7 @@ struct ColorSettings: View {
                 HStack {
                     Text("Size")
                         .frame(width: 150)
-                    Slider(value: $font_size, in: 0...font_size_geo)
+                    Slider(value: $font_size, in: 0...30)
                 }
                 HStack {
                     Text("Rotation")
@@ -105,7 +105,7 @@ struct ColorSettings: View {
                 HStack {
                     Text("Width")
                         .frame(width: 150)
-                    Slider(value: $width_border, in: 0...border_geo) //75
+                    Slider(value: $width_border, in: 0...75) //75
                 }
             }
         }

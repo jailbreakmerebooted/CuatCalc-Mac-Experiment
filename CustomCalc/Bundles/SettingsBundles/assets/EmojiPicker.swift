@@ -49,7 +49,7 @@ struct EmojiPicker: View {
                 HStack {
                     Text("Size")
                         .frame(width: 150)
-                    Slider(value: $font_size2_1, in: 0...font_size_geo)
+                    Slider(value: $font_size2_1, in: 0...30)
                 }
                 HStack {
                     Text("x")

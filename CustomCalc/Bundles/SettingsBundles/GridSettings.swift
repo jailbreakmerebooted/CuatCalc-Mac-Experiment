@@ -23,17 +23,17 @@ struct GridSettings: View {
                     HStack {
                         Text("Height")
                             .frame(width: 150)
-                        Slider(value: $spacing_grid_hor, in: 0...1000) //50
+                        Slider(value: $spacing_grid_hor, in: 0...50) //50
                     }
                     HStack {
                         Text("Width")
                             .frame(width: 150)
-                        Slider(value: $spacing_grid_ver, in: 0...1000) //500
+                        Slider(value: $spacing_grid_ver, in: 0...500) //500
                     }
                     HStack {
                         Text("Spacing")
                             .frame(width: 150)
-                        Slider(value: $spacing_outputbox, in: 0...1000) //75
+                        Slider(value: $spacing_outputbox, in: 0...75) //75
                     }
                 Button("Reset Size") {
                     spacing_grid_hor = 10
