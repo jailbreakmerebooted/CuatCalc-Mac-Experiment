@@ -280,7 +280,7 @@ struct Calculator: View {
                 font_size3_2 = Int(font_size3)
                 offsetx = Int(xemo)
                 offsety = Int(yemo)
-                //convcolor()
+                convcolor()
             }
             let defaultSymbols = ["AC", "sin", "cos", "tan","√", "sin⁻¹", "cos⁻¹", "tan⁻¹","7", "8", "9", "÷", "4", "5", "6", "×", "1", "2", "3", "-", "0", ".", "=", "+"]
             width_calc_button = CGFloat(width_calc_button2)
@@ -306,7 +306,7 @@ struct Calculator: View {
             yemo = CGFloat(offsety)
             used2 = true
             if used == false {
-                //convcolor()
+                convcolor()
                 UserDefaults.standard.set(defaultSymbols, forKey: "Symbols")
                 used = true
             }
@@ -314,9 +314,9 @@ struct Calculator: View {
             coph = UserDefaults.standard.stringArray(forKey: "coph") ?? []
             symbols = UserDefaults.standard.stringArray(forKey: "Symbols") ?? []
             if started == false {
-                //convcolor()
+                convcolor()
             } else if started == true {
-                //convcolorback()
+                convcolorback()
             }
         }
     }
@@ -344,27 +344,31 @@ struct Calculator: View {
         calculateResult()
         currentOperation = .none
     }
-    /*private func colorToRGBString(_ color: Color) -> String {
-        let uiColor = UIColor(color)
-        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
-        uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+    private func colorToRGBString(_ color: Color) -> String {
+        // Convert SwiftUI Color to NSColor
+        let nsColor = NSColor(color)
         
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        nsColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
         let redInt = Int(red * 255)
         let greenInt = Int(green * 255)
         let blueInt = Int(blue * 255)
-        
+
         return "\(redInt),\(greenInt),\(blueInt)"
     }
+
     private func RGBStringToColor(_ rgbString: String) -> Color {
         let components = rgbString.components(separatedBy: ",").compactMap { Int($0) }
         guard components.count == 3 else {
-            return .black
+            return Color.black
         }
-        
+
         let red = Double(components[0]) / 255.0
         let green = Double(components[1]) / 255.0
         let blue = Double(components[2]) / 255.0
-        
+
+        // Create SwiftUI Color from RGB components
         return Color(red: red, green: green, blue: blue)
     }
     private func convcolor() {
@@ -385,7 +389,7 @@ struct Calculator: View {
         selcolor5 = RGBStringToColor(colorString6)
         color_border = RGBStringToColor(colorString5)
         uicolor = RGBStringToColor(colorString7)
-    }*/
+    }
     
     private func buttonPressed(_ symbol: String) {
         switch symbol {
