@@ -130,8 +130,8 @@
 				A7361F0E2A1BC64000DB4455 /* Localizable.strings */,
 				A7ECDF482A0E6F6900B448FC /* CustomCalcApp.swift */,
 				A7ECDF762A0E905A00B448FC /* RootView.swift */,
-				EFFE953E2B3A3F9A00B25366 /* License.swift */,
 				A78D582E2A12B4F400C300C1 /* Layout.swift */,
+				EFFE953E2B3A3F9A00B25366 /* License.swift */,
 				A75AD05A2A11615F00186C35 /* Pages */,
 			);
 			path = Root;
